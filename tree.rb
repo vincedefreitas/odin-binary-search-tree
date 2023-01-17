@@ -86,11 +86,12 @@ class Tree
     preorder(node.right)
   end
 
-  def inorder(node = @root)
+  def inorder(node = @root, output = [])
     return if node.nil?
-    inorder(node.left)
-    print "#{node.data}"
-    inorder(node.right)
+    inorder(node.left, output)
+    output << node.data
+    inorder(node.right, output)
+    output
   end
 
   def postorder(node = @root)
@@ -123,16 +124,23 @@ class Tree
     right = height(@root.right, 0)
     (left - right).between?(-1, 1)
   end
+
+  def rebalance
+    arr = inorder
+    @root = build_tree(arr)
+  end
 end
 
-array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+array = Array.new(15) { rand(1..100)}
 tree = Tree.new(array)
-tree.insert(8)
-tree.delete(8)
-tree.pretty_print
+p tree.balanced?
 p tree.preorder
-p tree.inorder
 p tree.postorder
-p tree.height
-p tree.depth(9)
+p tree.inorder
+10.times do
+  a = rand(100..150)
+  tree.insert(a)
+end
+p tree.balanced?
+tree.rebalance
 p tree.balanced?
