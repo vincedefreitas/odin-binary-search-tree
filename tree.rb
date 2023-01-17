@@ -118,11 +118,11 @@ class Tree
     count
   end
 
-
-
-
-
-
+  def balanced?
+    left = height(@root.left, 0)
+    right = height(@root.right, 0)
+    (left - right).between?(-1, 1)
+  end
 end
 
 array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
@@ -135,3 +135,4 @@ p tree.inorder
 p tree.postorder
 p tree.height
 p tree.depth(9)
+p tree.balanced?
