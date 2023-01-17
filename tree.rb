@@ -138,8 +138,8 @@ p tree.preorder
 p tree.postorder
 p tree.inorder
 10.times do
-  a = rand(100..150)
-  tree.insert(a)
+  num = rand(100..120)
+  tree.insert(num)
 end
 p tree.balanced?
 tree.rebalance
